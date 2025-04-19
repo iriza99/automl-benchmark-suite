@@ -4,6 +4,11 @@ from dataset_loader import (
     load_from_excel_files
 )
 
+import pandas as pd
+from autogluon.tabular import TabularPredictor
+
+# ─── LOAD DATA ────────────────────────────────────────────────────────────────
+
 # Load data from OpenML (example: task_id=267 (diabetes))
 X_train, y_train, X_test, y_test, label_column = load_from_openml(task_id=267)
 print(f"[OpenML] {label_column=}, {X_train.shape=}, {X_test.shape=}")
@@ -26,10 +31,7 @@ print(f"[OpenML] {label_column=}, {X_train.shape=}, {X_test.shape=}")
 # )
 # print(f"[Excel] {label_column=}, {X_train.shape=}, {X_test.shape=}")
 
-
-
-import pandas as pd
-from autogluon.tabular import TabularPredictor
+# ─── AUTOGLUON ────────────────────────────────────────────────────────────
 
 # Combine features and label into a single DataFrame for AutoGluon
 train_data = pd.concat([X_train, y_train], axis=1)
